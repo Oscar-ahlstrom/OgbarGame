@@ -1611,12 +1611,10 @@ MonoBehaviour:
   playerDamage: 2
   playerMaxHealth: 50
   playerHealth: 0
-  enemySprite:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  enemyDamage: 010000000200000003000000
-  enemyMaxHealth: 0a000000140000001e000000
+  enemies:
+  - {fileID: 11400000, guid: 8da63cb75fd73fe43b4f7c769477c493, type: 2}
+  - {fileID: 11400000, guid: 8da63cb75fd73fe43b4f7c769477c493, type: 2}
+  - {fileID: 11400000, guid: 8da63cb75fd73fe43b4f7c769477c493, type: 2}
   enemyHealth: 000000000000000000000000
   enemyTargetButtons:
   - {fileID: 948499343}

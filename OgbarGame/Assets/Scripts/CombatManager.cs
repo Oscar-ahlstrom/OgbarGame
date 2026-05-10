@@ -2,6 +2,16 @@ using UnityEngine;
 
 public class CombatManager : MonoBehaviour
 {
+    //MAJOR: 
+    // make the menus and code scale with infinite enemies <---- DANGEROUS
+    // Setup healthbars and connect them to the enemies current health
+    //
+    //MINOR:
+    // Make a cool sprite in asprite and dither it 
+    // add a shitty sprite and make the enemies use it 
+    // make a backround 
+    //
+
     [Header("PlayerStats")]
     [SerializeField] public int playerDamage;
     [SerializeField] public int playerMaxHealth;
@@ -9,11 +19,10 @@ public class CombatManager : MonoBehaviour
 
     //Gör om till en scriptableObject
     [Header("EnemyStats")]
-    [SerializeField] public Sprite[] enemySprite;
-    [SerializeField] public int[] enemyDamage;
-    [SerializeField] public int[] enemyMaxHealth;
+    [SerializeField] public Enemy[] enemies;
     public int[] enemyHealth;
-    
+    public int enemiesDead;
+
 
     [Header("Misc")]
     [SerializeField] public GameObject[] enemyTargetButtons;
@@ -31,14 +40,15 @@ public class CombatManager : MonoBehaviour
 
     private void Start()
     {
+        //Turn off target buttons by default
         for (int Loop = 0; Loop < enemyTargetButtons.Length; Loop++)
         {
             enemyTargetButtons[Loop].active = false;
         }
-
-        for (int Loop = 0; Loop < enemyMaxHealth.Length; Loop++)
+        //setup enemy health
+        for (int Loop = 0; Loop < enemies.Length; Loop++)
         {
-            enemyHealth[Loop] = enemyMaxHealth[Loop];
+            enemyHealth[Loop] = enemies[Loop].maxHealth;
         }
 
         attackButtonIsPressed = false;
@@ -106,18 +116,21 @@ public class CombatManager : MonoBehaviour
     public void DealDamage(int Target)
     {
         enemyHealth[Target] -= playerDamage;
-        enemyHealth[Target] = Mathf.Clamp(enemyHealth[Target], 0, enemyMaxHealth[Target]);
+        enemyHealth[Target] = Mathf.Clamp(enemyHealth[Target], 0, enemies[Target].maxHealth);
 
-        if (enemyHealth[Target] <= 0)
+        if (enemyHealth[Target] > 0) { return; }
+
+        enemiesDead++;
+        if (enemiesDead == enemies.Length)
         {
-            //MAJOR_FIX Jag vill vinna när alla är döda och inte bara när en dör
             state = GameState.Win;
         }
     }
 
     public void TakeDamage()
     {
-        playerHealth -= enemyDamage[Random.Range(0, enemyDamage.Length)];
+        //Make all enemies do damage to you
+        playerHealth -= enemies[Random.Range(0, enemies.Length)].damage;
         playerHealth = Mathf.Clamp(playerHealth, 0, playerMaxHealth);
 
         if (playerHealth == 0)
