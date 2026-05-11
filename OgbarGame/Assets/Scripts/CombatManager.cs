@@ -8,8 +8,8 @@ public class CombatManager : MonoBehaviour
     //
     //MINOR:
     // Make a cool sprite in asprite and dither it 
-    // add a shitty sprite and make the enemies use it 
-    // make a backround 
+    // make a backround
+    //  
     //
 
     [Header("PlayerStats")]
@@ -18,8 +18,9 @@ public class CombatManager : MonoBehaviour
     public int playerHealth;
 
     //Gör om till en scriptableObject
-    [Header("EnemyStats")]
+    [Header("Enemy")]
     [SerializeField] public Enemy[] enemies;
+    [SerializeField] public GameObject[] enemyRenderers;
     public int[] enemyHealth;
     public int enemiesDead;
 
