@@ -1,4 +1,6 @@
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CombatManager : MonoBehaviour
 {
@@ -20,17 +22,19 @@ public class CombatManager : MonoBehaviour
     //Gör om till en scriptableObject
     [Header("Enemy")]
     [SerializeField] public Enemy[] enemies;
-    [SerializeField] public GameObject[] enemyRenderers;
+    [SerializeField] public GameObject[] enemyImageObj;
     public int[] enemyHealth;
     public int enemiesDead;
 
 
     [Header("Misc")]
-    [SerializeField] public GameObject[] enemyTargetButtons;
-    
+    public GameObject[] enemyTargetButtons;
+    [SerializeField] public GameObject enemyTargetPrefab;
+    [SerializeField] public GameObject canvas;
 
+    private float enemySpace;
     public GameState state;
-    public bool attackButtonIsPressed;
+    [SerializeField] public bool attackButtonIsPressed;
     public enum GameState
     {
         PlayerTurn,
@@ -41,20 +45,50 @@ public class CombatManager : MonoBehaviour
 
     private void Start()
     {
-        //Turn off target buttons by default
-        for (int Loop = 0; Loop < enemyTargetButtons.Length; Loop++)
+        enemySpace = (Screen.width / enemies.Length);
+
+        //Definera Array Längder
+        enemyTargetButtons = new GameObject[enemies.Length];
+        enemyImageObj = new GameObject[enemies.Length];
+        enemyHealth = new int[enemies.Length];
+
+
+        //Spawna Enemies utifrån hur många som finns i arrayen och hämta alla komponenter som krävs
+        for (int i = 0; i < enemies.Length; i++)
         {
-            enemyTargetButtons[Loop].active = false;
+            GameObject enemyTarget = //Spara referencen till objectet som spawnas 
+            Instantiate(
+            enemyTargetPrefab,   //Vad ska spawnas
+            new Vector3(-enemySpace / 2 + (enemySpace * (i + 1)), Screen.height / 2, 0),    //Vart dom ska spawnas 
+            quaternion.identity, //hur ska den roteras när den spawnar
+            canvas.transform);   //Vilken transform ska den bo under  
+
+            EnemyButton enemyButton = enemyTarget.GetComponentInChildren<EnemyButton>(); //Hämta Componenten från enemyTarget
+            enemyButton.enabled = true;
+            enemyButton.enemyId = i; //Componentens ID är loops
+            enemyButton.combatManager = this;
+            enemyTargetButtons[i] = enemyButton.gameObject;
+            enemyButton.gameObject.SetActive(false);
+
+            //FIX Hitta ett sätt att referera så att den kan hämta spriten till enemyn consitentlyoch inte randomly mellan 
+            //Dubbel Verifikation med Tag och enemyTarget?
+
+            Image image = enemyTarget.GetComponentInChildren<Image>();
+            
+            image.sprite = enemies[i].sprite;
+
+
         }
-        //setup enemy health
+
+
         for (int Loop = 0; Loop < enemies.Length; Loop++)
         {
             enemyHealth[Loop] = enemies[Loop].maxHealth;
         }
 
-        attackButtonIsPressed = false;
         state = GameState.PlayerTurn;
         playerHealth = playerMaxHealth;
+
     }
 
     private void Update()
@@ -89,6 +123,7 @@ public class CombatManager : MonoBehaviour
 
     public void PressAttackButton()
     {
+        
         switch (attackButtonIsPressed)
         {
             case false:
@@ -112,6 +147,7 @@ public class CombatManager : MonoBehaviour
                 attackButtonIsPressed = false;
                 break;
         }
+        
     }
 
     public void DealDamage(int Target)
@@ -131,7 +167,7 @@ public class CombatManager : MonoBehaviour
     public void TakeDamage()
     {
         //Make all enemies do damage to you
-        playerHealth -= enemies[Random.Range(0, enemies.Length)].damage;
+        playerHealth -= enemies[UnityEngine.Random.Range(0, enemies.Length)].damage;
         playerHealth = Mathf.Clamp(playerHealth, 0, playerMaxHealth);
 
         if (playerHealth == 0)
