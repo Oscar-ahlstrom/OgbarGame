@@ -1,13 +1,11 @@
 using UnityEngine;
-using UnityEngine.UI;
 
-public class EnemyButton : Button
+public class ButtonInfo : MonoBehaviour
 {
     public int enemyId;
-
     public CombatManager combatManager;
 
-    public void klick()
+    public void Klick()
     {
         combatManager.DealDamage(enemyId);
         combatManager.PressAttackButton();

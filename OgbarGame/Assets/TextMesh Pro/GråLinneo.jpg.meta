@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7228f75cfd269ad4f8af7b5a0671bc92
+guid: 06bf9a15b85973d44bb46b007f9a6ce1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4737698813717887230
-    second: Durr_0
+      213: -1653944941034834116
+    second: "Gr\xE5Linneo_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Durr_0
+      name: "Gr\xE5Linneo_0"
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 394
-        height: 400
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2074e83c700504eb0800000000000000
-      internalID: -4737698813717887230
+      spriteID: c37709fc6d10c09e0800000000000000
+      internalID: -1653944941034834116
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Durr_0: -4737698813717887230
+      "Gr\xE5Linneo_0": -1653944941034834116
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

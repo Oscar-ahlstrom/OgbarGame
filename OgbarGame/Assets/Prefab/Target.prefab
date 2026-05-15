@@ -28,8 +28,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4265089057473794626}
   - {fileID: 5346780950197385997}
+  - {fileID: 4265089057473794626}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -262,7 +262,8 @@ GameObject:
   - component: {fileID: 4265089057473794626}
   - component: {fileID: 1240219375908331956}
   - component: {fileID: 3351539950301621187}
-  - component: {fileID: 5399557454976233081}
+  - component: {fileID: 8352578546421204493}
+  - component: {fileID: 4450706004566367012}
   m_Layer: 5
   m_Name: Target Button
   m_TagString: Untagged
@@ -328,7 +329,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5399557454976233081
+--- !u!114 &8352578546421204493
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -337,9 +338,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6985612113653246547}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b734a865d1bd5f4d9a3abac1a82ff26, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyButton
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
   m_Navigation:
     m_Mode: 3
     m_WrapAround: 0
@@ -372,9 +373,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5399557454976233081}
-        m_TargetAssemblyTypeName: EnemyButton, Assembly-CSharp
-        m_MethodName: klick
+      - m_Target: {fileID: 4450706004566367012}
+        m_TargetAssemblyTypeName: ButtonInfo, Assembly-CSharp
+        m_MethodName: Klick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -384,5 +385,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4450706004566367012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6985612113653246547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74ceea87b10ea4f4c9d764baf62be8d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonInfo
   enemyId: 0
   combatManager: {fileID: 0}

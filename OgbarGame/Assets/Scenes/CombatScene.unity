@@ -533,7 +533,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -200}
+  m_AnchoredPosition: {x: 0, y: -300}
   m_SizeDelta: {x: 400, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1367271032
@@ -754,9 +754,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatManager
   playerDamage: 2
-  playerMaxHealth: 50
+  playerMaxHealth: 10
   playerHealth: 0
   enemies:
+  - {fileID: 11400000, guid: 6721479c385cd944a92ffaed3d897c50, type: 2}
   - {fileID: 11400000, guid: 8da63cb75fd73fe43b4f7c769477c493, type: 2}
   - {fileID: 11400000, guid: 6721479c385cd944a92ffaed3d897c50, type: 2}
   - {fileID: 11400000, guid: 8da63cb75fd73fe43b4f7c769477c493, type: 2}
@@ -767,6 +768,7 @@ MonoBehaviour:
   enemyTargetButtons: []
   enemyTargetPrefab: {fileID: 5015167720698002916, guid: 46d32026287446c44a55aea5946666c9, type: 3}
   canvas: {fileID: 537303747}
+  deadColorMod: {r: 1, g: 0.03773585, b: 0, a: 0.29803923}
   state: 0
   attackButtonIsPressed: 0
 --- !u!1660057539 &9223372036854775807

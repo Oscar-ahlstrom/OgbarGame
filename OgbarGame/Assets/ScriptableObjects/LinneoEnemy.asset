@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5bae53fa9ed3f4d4e84f196066a96db5, type: 3}
-  m_Name: DurrEnemy
+  m_Name: LinneoEnemy
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  sprite: {fileID: -4737698813717887230, guid: 7228f75cfd269ad4f8af7b5a0671bc92, type: 3}
+  aliveSprite: {fileID: -1653944941034834116, guid: 4b7a0ce2a50aaa8478b6cf6f15c4e29a, type: 3}
+  deadSprite: {fileID: -1653944941034834116, guid: 4b7a0ce2a50aaa8478b6cf6f15c4e29a, type: 3}
   damage: 4
   maxHealth: 6
