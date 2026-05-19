@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   aliveSprite: {fileID: -1653944941034834116, guid: 4b7a0ce2a50aaa8478b6cf6f15c4e29a, type: 3}
   deadSprite: {fileID: -1653944941034834116, guid: 4b7a0ce2a50aaa8478b6cf6f15c4e29a, type: 3}
-  damage: 4
-  maxHealth: 6
+  damage: 0
+  maxHealth: 7
