@@ -1,14 +1,18 @@
+using System.Collections;
+using System.Runtime.CompilerServices;
 using TMPro;
+using Unity.Hierarchy;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
 public class CombatManager : MonoBehaviour
 {
     [Header("PlayerStats")]
     [SerializeField] public int playerDamage;
     [SerializeField] public int playerMaxHealth;
-    public int playerHealth;
+    public float playerHealth;
     [SerializeField] public Image playerHealthBar;
     [SerializeField] public TextMeshProUGUI playerHealthText;
 
@@ -21,15 +25,19 @@ public class CombatManager : MonoBehaviour
     public Image[] enemyHealthBar;
     public TextMeshProUGUI[] enemyHealthText;
     public float[] enemyHealth; //Jag skulle helst vilja hålla enemyhealth till heltal men för att räkna ut divisioner så behövde den vara en float
-    public int enemiesDead;
+    public int enemiesDead; //How many are dead
+    public bool[] enemyIsAlive; //is THIS enemy dead
 
 
     [Header("Misc")]
     [SerializeField] public GameObject enemyTargetPrefab;
     [SerializeField] public GameObject canvas;
     [SerializeField] public GameObject uiPanel;
+    public RectTransform panelTransform;
+    
     [SerializeField] public Color deadColorMult;
 
+    private bool enemyAttackAnimation;
     private float enemySpace;
     public GameState state;
     public bool attackButtonIsPressed;
@@ -52,6 +60,7 @@ public class CombatManager : MonoBehaviour
         enemyHealth = new float[enemies.Length];
         enemyHealthBar = new Image[enemies.Length];
         enemyHealthText = new TextMeshProUGUI[enemies.Length];
+        enemyIsAlive = new bool[enemies.Length];
 
         //Spawna Enemies utifrån hur många som finns i arrayen
         //Hitta pointerScript för att hitta rätt object
@@ -100,9 +109,13 @@ public class CombatManager : MonoBehaviour
             HealthNumber hn = enemyTarget.GetComponentInChildren<HealthNumber>();
             TextMeshProUGUI HealthText = hn.gameObject.GetComponent<TextMeshProUGUI>();
 
+            panelTransform = uiPanel.GetComponent<RectTransform>();
+            panelTransform.anchoredPosition = new Vector2(0, -Screen.height / 2);
+
             enemyHealth[i] = enemies[i].maxHealth; //Definera hur mycket HP fienderna har 
             enemyHealthText[i] = HealthText;
             HealthText.text = ("" + (enemyHealth[i]));
+            enemyIsAlive[i] = true;
         }
 
         //Spelaren ska börja 
@@ -119,13 +132,13 @@ public class CombatManager : MonoBehaviour
         switch (state)
         {
             case GameState.PlayerTurn:
-                uiPanel.GetComponent<RectTransform>().localPosition = new Vector3(0, 135, 0);
+                panelTransform.anchoredPosition = new Vector3(0, 135, 0);
 
                 break;
 
 
             case GameState.EnemyTurn:
-                uiPanel.GetComponent<RectTransform>().localPosition = new Vector3(0, -135, 0);
+                panelTransform.anchoredPosition = new Vector3(0, -135, 0);
 
                 break;
 
@@ -133,12 +146,12 @@ public class CombatManager : MonoBehaviour
             case GameState.Win:
                 //Enable win screen
                 //Rest of game in another Scene?
-
+                 
                 break;
 
 
             case GameState.Lose:
-                //Enable Lose Screen
+                //Enable Lose Screen 
 
                 break;
         }
@@ -173,7 +186,7 @@ public class CombatManager : MonoBehaviour
 
     }
 
-    public void DealDamage(int Target)
+    public void EnemyTakeDamage(int Target)
     {
         enemyHealth[Target] -= playerDamage;
         enemyHealth[Target] = Mathf.Clamp(enemyHealth[Target], 0, enemies[Target].maxHealth);
@@ -187,7 +200,8 @@ public class CombatManager : MonoBehaviour
             return;
         }
 
-        enemyAnimationController[Target].SetTrigger("Dead");
+        enemyAnimationController[Target].SetBool("IsDead", true);
+        enemyIsAlive[Target] = false;
 
         enemiesDead++;
         Image image = enemyImageObj[Target].GetComponent<Image>();
@@ -199,6 +213,28 @@ public class CombatManager : MonoBehaviour
             state = GameState.Win;
             //Vinst funktion Istället för att man switchar gamestate? 
         }
+    }
+
+
+    public void PlayEnemyTurn()
+    {
+        StartCoroutine(PlayEnemyTurnCoroutine());
+    }
+    public IEnumerator PlayEnemyTurnCoroutine()
+    {
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            if (enemyIsAlive[i])
+            {
+                enemyAnimationController[i].SetTrigger("Attack");
+                playerHealth -= enemies[i].damage;
+                yield return new WaitForSeconds(1f);
+            }
+            playerHealth = Mathf.Clamp(playerHealth, 0, playerMaxHealth);
+            playerHealthBar.fillAmount = (playerHealth / playerMaxHealth);
+            playerHealthText.text = ("" + (playerHealth));
+        }
+        
     }
 
     public void FlipState()

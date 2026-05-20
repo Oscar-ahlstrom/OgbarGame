@@ -7,7 +7,7 @@ public class ButtonInfo : MonoBehaviour
 
     public void Klick()
     {
-        combatManager.DealDamage(enemyId);
+        combatManager.EnemyTakeDamage(enemyId);
         combatManager.PressAttackButton();
     }
 }
