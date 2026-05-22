@@ -16,7 +16,6 @@ public class CombatManager : MonoBehaviour
     [SerializeField] public Image playerHealthBar;
     [SerializeField] public TextMeshProUGUI playerHealthText;
 
-    //Gör om till en scriptableObject
     [Header("Enemy")]
     [SerializeField] public Enemy[] enemies;
     public GameObject[] enemyImageObj;
@@ -228,13 +227,12 @@ public class CombatManager : MonoBehaviour
             {
                 enemyAnimationController[i].SetTrigger("Attack");
                 playerHealth -= enemies[i].damage;
+                playerHealth = Mathf.Clamp(playerHealth, 0, playerMaxHealth);
+                playerHealthBar.fillAmount = (playerHealth / playerMaxHealth);
+                playerHealthText.text = ("" + (playerHealth));
                 yield return new WaitForSeconds(1f);
             }
-            playerHealth = Mathf.Clamp(playerHealth, 0, playerMaxHealth);
-            playerHealthBar.fillAmount = (playerHealth / playerMaxHealth);
-            playerHealthText.text = ("" + (playerHealth));
         }
-        
     }
 
     public void FlipState()
