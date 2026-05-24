@@ -233,6 +233,7 @@ public class CombatManager : MonoBehaviour
                 yield return new WaitForSeconds(1f);
             }
         }
+        FlipState();
     }
 
     public void FlipState()

@@ -42,8 +42,9 @@ Material:
     m_Ints: []
     m_Floats:
     - _SineY_X: 0
+    - _Sine_Reduction: 0.5
     - _WobbleSpeed: 1
-    - _WobbleStrenght: 1.5
+    - _WobbleStrenght: 3
     m_Colors:
     - White: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColor: {r: 0.517647, g: 0.1333333, b: 0.2386379, a: 1}

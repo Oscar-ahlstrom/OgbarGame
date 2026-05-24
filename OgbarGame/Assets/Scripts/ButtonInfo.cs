@@ -9,5 +9,7 @@ public class ButtonInfo : MonoBehaviour
     {
         combatManager.EnemyTakeDamage(enemyId);
         combatManager.PressAttackButton();
+        combatManager.FlipState();
+        combatManager.PlayEnemyTurn();
     }
 }
