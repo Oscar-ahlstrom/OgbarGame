@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3b32d19e3a2dcda44bbcd1d8a16249a7
+guid: c6937f2034a9a2c4bb6a3cbd653878a9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5421872573110903762
-    second: Backround_0
+      213: -6627603395131899686
+    second: Hand_4_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Backround_0
+      name: Hand_4_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1920
-        height: 1080
+        width: 82
+        height: 127
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e2c9a4efe93a1c4b0800000000000000
-      internalID: -5421872573110903762
+      spriteID: ad08df0a3d50604a0800000000000000
+      internalID: -6627603395131899686
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Backround_0: -5421872573110903762
+      Hand_4_0: -6627603395131899686
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
