@@ -1,32 +1,44 @@
 using UnityEngine;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    SaveData saveData;
-
+    [SerializeField] public Enemy[] enemies;
+    public static GameManager instance;
     public int score;
-    public int otherScore;
+    
+    public string filepath;
 
     private void Start()
     {
-        Debug.Log(Application.persistentDataPath + "/Save.json");
+        filepath = Application.persistentDataPath + "/Save.json";
     }
 
-    public void SaveGame()
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    public void SaveFile()
     {
         SaveData data = new();
 
         data.score = score; //Här skulle man Tex hämta info från inventoriet eller gamemanager
-        data.otherScore = otherScore;
 
         string json = JsonUtility.ToJson(data, true); //False gör text filen mer compact men svårare att läsa
 
         File.WriteAllText(Application.persistentDataPath + "/Save.json", json); //Skriv ALL info som finns i detta script till "filePath" 
 
     }
-
-    public void LoadGame()
+    public void LoadFile()
     {
         if (File.Exists(Application.persistentDataPath + "/Save.json"))
         {
@@ -35,7 +47,13 @@ public class GameManager : MonoBehaviour
             SaveData data = JsonUtility.FromJson<SaveData>(json);
 
             score = data.score;
-            otherScore = data.otherScore;
         }
+    }
+
+    public void LoadScene()
+    {
+        //Load CombatScene
+        SceneManager.LoadScene(1);
+
     }
 }

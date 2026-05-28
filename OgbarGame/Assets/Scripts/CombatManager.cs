@@ -1,11 +1,9 @@
 using System.Collections;
-using System.Runtime.CompilerServices;
 using TMPro;
-using Unity.Hierarchy;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static UnityEngine.GraphicsBuffer;
 
 public class CombatManager : MonoBehaviour
 {
@@ -17,7 +15,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] public TextMeshProUGUI playerHealthText;
 
     [Header("Enemy")]
-    [SerializeField] public Enemy[] enemies;
+    public Enemy[] enemies;
     public GameObject[] enemyImageObj;
     public Animator[] enemyAnimationController;
     public GameObject[] enemyTargetButtons;
@@ -33,13 +31,14 @@ public class CombatManager : MonoBehaviour
     [SerializeField] public GameObject canvas;
     [SerializeField] public GameObject uiPanel;
     public RectTransform panelTransform;
-    
+    private GameManager gameManager;
+
     [SerializeField] public Color deadColorMult;
 
-    private bool enemyAttackAnimation;
     private float enemySpace;
     public GameState state;
     public bool attackButtonIsPressed;
+
     public enum GameState
     {
         PlayerTurn,
@@ -50,6 +49,14 @@ public class CombatManager : MonoBehaviour
 
     private void Start()
     {
+        gameManager = GameManager.instance;
+        enemies = new Enemy[gameManager.enemies.Length];
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            enemies[i] = gameManager.enemies[i];
+        }
+
+
         enemySpace = (Screen.width / enemies.Length);
 
         //Definera Array Längder
@@ -202,6 +209,9 @@ public class CombatManager : MonoBehaviour
         enemyAnimationController[Target].SetBool("IsDead", true);
         enemyIsAlive[Target] = false;
 
+        gameManager.score += 1;
+        
+
         enemiesDead++;
         Image image = enemyImageObj[Target].GetComponent<Image>();
         image.color = deadColorMult;
@@ -209,7 +219,7 @@ public class CombatManager : MonoBehaviour
 
         if (enemiesDead == enemies.Length)
         {
-            state = GameState.Win;
+            SceneManager.LoadScene(0);
             //Vinst funktion Istället för att man switchar gamestate? 
         }
     }

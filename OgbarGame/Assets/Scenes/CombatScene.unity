@@ -1738,11 +1738,7 @@ MonoBehaviour:
   playerHealth: 0
   playerHealthBar: {fileID: 1265518779}
   playerHealthText: {fileID: 1091911576}
-  enemies:
-  - {fileID: 11400000, guid: 6721479c385cd944a92ffaed3d897c50, type: 2}
-  - {fileID: 11400000, guid: 6721479c385cd944a92ffaed3d897c50, type: 2}
-  - {fileID: 11400000, guid: 8da63cb75fd73fe43b4f7c769477c493, type: 2}
-  - {fileID: 11400000, guid: 8da63cb75fd73fe43b4f7c769477c493, type: 2}
+  enemies: []
   enemyImageObj: []
   enemyAnimationController: []
   enemyTargetButtons: []
@@ -1754,7 +1750,7 @@ MonoBehaviour:
   enemyTargetPrefab: {fileID: 5015167720698002916, guid: 46d32026287446c44a55aea5946666c9, type: 3}
   canvas: {fileID: 537303747}
   uiPanel: {fileID: 257319997}
-  panelTransform: {fileID: 0}
+  panelTransform: {fileID: 257319998}
   deadColorMult: {r: 0, g: 0, b: 0, a: 0}
   state: 0
   attackButtonIsPressed: 0
