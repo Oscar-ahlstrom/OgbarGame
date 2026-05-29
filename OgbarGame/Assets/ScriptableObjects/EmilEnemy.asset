@@ -16,3 +16,5 @@ MonoBehaviour:
   deadSprite: {fileID: -8828240628157534353, guid: ec39befba2e66a24290914111e7d9c06, type: 3}
   damage: 2
   maxHealth: 5
+  xp: 2
+  money: 7

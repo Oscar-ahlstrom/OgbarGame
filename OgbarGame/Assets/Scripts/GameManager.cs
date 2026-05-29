@@ -7,7 +7,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] public Enemy[] enemies;
     public static GameManager instance;
     public int score;
-    
+    public int xp;
+    public int money;
+
     public string filepath;
 
     private void Start()
@@ -27,27 +29,33 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void SaveFile()
+    public void SaveFile(int slot)
     {
         SaveData data = new();
 
         data.score = score; //Här skulle man Tex hämta info från inventoriet eller gamemanager
+        data.xp = xp;
+        data.money = money;
 
         string json = JsonUtility.ToJson(data, true); //False gör text filen mer compact men svårare att läsa
 
-        File.WriteAllText(Application.persistentDataPath + "/Save.json", json); //Skriv ALL info som finns i detta script till "filePath" 
+        File.WriteAllText(Application.persistentDataPath + "/Save" + slot + ".json" , json); //Skriv ALL info som finns i detta script till "filePath" 
 
     }
-    public void LoadFile()
+    public void LoadFile(int slot)
     {
-        if (File.Exists(Application.persistentDataPath + "/Save.json"))
+        if (File.Exists(Application.persistentDataPath + "/Save" + slot + ".json"))
         {
-            string json = File.ReadAllText(Application.persistentDataPath + "/Save.json"); //Läs json info från "filePath"
+            string json = File.ReadAllText(Application.persistentDataPath + "/Save" + slot + ".json"); //Läs json info från "filePath"
 
             SaveData data = JsonUtility.FromJson<SaveData>(json);
 
             score = data.score;
+            xp = data.xp;
+            money = data.money;
+            return;
         }
+        Debug.Log("No Save found on slot" + slot);
     }
 
     public void LoadScene()

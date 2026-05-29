@@ -210,7 +210,9 @@ public class CombatManager : MonoBehaviour
         enemyIsAlive[Target] = false;
 
         gameManager.score += 1;
-        
+        gameManager.money += enemies[Target].money;
+        gameManager.xp += enemies[Target].xp;
+
 
         enemiesDead++;
         Image image = enemyImageObj[Target].GetComponent<Image>();
@@ -219,8 +221,11 @@ public class CombatManager : MonoBehaviour
 
         if (enemiesDead == enemies.Length)
         {
+            //Sätt en Invoke för att ge den en liten delay 
+            //eller
+            //Switcha gamestate för att ta fram en win screen så att spelaren kan själv välja när man ska gå vidare
             SceneManager.LoadScene(0);
-            //Vinst funktion Istället för att man switchar gamestate? 
+            
         }
     }
 
