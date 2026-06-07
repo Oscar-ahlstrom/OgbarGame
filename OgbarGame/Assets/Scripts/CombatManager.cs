@@ -11,8 +11,10 @@ public class CombatManager : MonoBehaviour
     [SerializeField] public int playerDamage;
     public int playerMaxHealth;
     public float playerHealth;
+    [SerializeField] public int playerHeal;
     [SerializeField] public Image playerHealthBar;
     [SerializeField] public TextMeshProUGUI playerHealthText;
+
 
     [Header("Enemy")]
     public Enemy[] enemies;
@@ -193,6 +195,15 @@ public class CombatManager : MonoBehaviour
 
     }
 
+    public void PressHealButton()
+    {
+        playerHealth += playerHeal;
+        playerHealthBar.fillAmount = playerHealth / playerMaxHealth;
+        playerHealthText.text = ("" + (playerHealth));
+        FlipState();
+        PlayEnemyTurn();
+    }
+
     public void EnemyTakeDamage(int Target)
     {
         enemyHealth[Target] -= playerDamage;
@@ -250,7 +261,6 @@ public class CombatManager : MonoBehaviour
         }
         FlipState();
     }
-
     public void FlipState()
     {
         switch (state)
@@ -269,7 +279,6 @@ public class CombatManager : MonoBehaviour
 
         }
     }
-
     public void LoadHomeScene()
     {
         SceneManager.LoadScene(0);
