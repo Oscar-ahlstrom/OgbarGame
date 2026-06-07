@@ -6,7 +6,7 @@ Turnbase battler featuring the absolute bare minimum to be considred a game
 
 <img width="1644" height="950" alt="BattleScreen" src="https://github.com/user-attachments/assets/96cd5be9-de3c-42f5-af5a-d35c155c79a5" />
 
-* How do i play this?
+* How do i play this? (IM SORRY IT'S A GITHUB REPO BUT IM NOT MAKING A WEB GAME OKAY)
 
 Navigate to the repo main page and click the green code button
 and clone the repo either through opening with github desktop or by copying the link 
@@ -31,3 +31,10 @@ you can use the unity editor to see behind the scenes by adding the repo as a un
 <img width="468" height="158" alt="image" src="https://github.com/user-attachments/assets/388f7c0c-58fc-4cc5-928b-04202bd10fe5" />
 <img width="783" height="450" alt="image" src="https://github.com/user-attachments/assets/c86648b9-aacc-4c15-9be6-0ea5e6e59454" />
 
+So anyways. What have I acctually managed to make so far?
+
+* A primitive savefile system using unitys builtin json data handling that can save score and health across playthroughs 
+
+* Functioning enemy fighting and simple turnorder 
+
+* Modular enemy spawning system that allows all systems to continue working with more or less enemies (you have to open through unity editor to use this)
