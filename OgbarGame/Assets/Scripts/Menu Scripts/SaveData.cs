@@ -6,4 +6,6 @@ public class SaveData
     public int xp;
     public int money;
 
+    public int playerMaxHealth;
+    public int playerCurrentHealth;
 }

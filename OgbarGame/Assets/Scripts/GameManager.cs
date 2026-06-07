@@ -12,6 +12,10 @@ public class GameManager : MonoBehaviour
 
     public string filepath;
 
+    [Header("Player Stats")]
+    [SerializeField] public int playerMaxHealth;
+    [SerializeField] public int playerCurrentHealth;
+
     private void Start()
     {
         filepath = Application.persistentDataPath + "/Save.json";
@@ -37,6 +41,9 @@ public class GameManager : MonoBehaviour
         data.xp = xp;
         data.money = money;
 
+        data.playerMaxHealth = playerMaxHealth;
+        data.playerCurrentHealth = playerCurrentHealth;
+
         string json = JsonUtility.ToJson(data, true); //False gör text filen mer compact men svårare att läsa
 
         File.WriteAllText(Application.persistentDataPath + "/Save" + slot + ".json" , json); //Skriv ALL info som finns i detta script till "filePath" 
@@ -53,6 +60,12 @@ public class GameManager : MonoBehaviour
             score = data.score;
             xp = data.xp;
             money = data.money;
+
+            playerMaxHealth = data.playerMaxHealth;
+            playerCurrentHealth = data.playerCurrentHealth;
+
+
+
             return;
         }
         Debug.Log("No Save found on slot" + slot);

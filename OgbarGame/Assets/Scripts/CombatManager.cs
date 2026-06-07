@@ -9,7 +9,7 @@ public class CombatManager : MonoBehaviour
 {
     [Header("PlayerStats")]
     [SerializeField] public int playerDamage;
-    [SerializeField] public int playerMaxHealth;
+    public int playerMaxHealth;
     public float playerHealth;
     [SerializeField] public Image playerHealthBar;
     [SerializeField] public TextMeshProUGUI playerHealthText;
@@ -127,7 +127,8 @@ public class CombatManager : MonoBehaviour
         //Spelaren ska börja 
         state = GameState.PlayerTurn;
         //Setup Spelar hälsan
-        playerHealth = playerMaxHealth;
+        playerMaxHealth = gameManager.playerMaxHealth;
+        playerHealth = gameManager.playerCurrentHealth;
         playerHealthBar.fillAmount = playerHealth / playerMaxHealth;
         playerHealthText.text = ("" + (playerHealth));
 
@@ -152,7 +153,7 @@ public class CombatManager : MonoBehaviour
             case GameState.Win:
                 //Enable win screen
                 //Rest of game in another Scene?
-                 
+
                 break;
 
 
@@ -221,11 +222,10 @@ public class CombatManager : MonoBehaviour
 
         if (enemiesDead == enemies.Length)
         {
-            //Sätt en Invoke för att ge den en liten delay 
-            //eller
+
+            gameManager.playerCurrentHealth = (int)playerHealth;
+            Invoke("LoadHomeScene",1f);
             //Switcha gamestate för att ta fram en win screen så att spelaren kan själv välja när man ska gå vidare
-            SceneManager.LoadScene(0);
-            
         }
     }
 
@@ -268,5 +268,10 @@ public class CombatManager : MonoBehaviour
 
 
         }
+    }
+
+    public void LoadHomeScene()
+    {
+        SceneManager.LoadScene(0);
     }
 }
